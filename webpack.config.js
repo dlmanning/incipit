@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+var path = require('path')
+var webpack = require('webpack')
 
 module.exports = {
   entry: [
@@ -8,13 +8,13 @@ module.exports = {
     './app/start' // Your appʼs entry point
   ],
   output: {
-    path: path.resolve(__dirname, "build"),
-    filename: "bundle.js",
-    publicPath: "http://localhost:8080/"
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js',
+    publicPath: 'http://localhost:8080/'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    //new webpack.NoErrorsPlugin()
+    new webpack.HotModuleReplacementPlugin()
+    // new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [
@@ -26,4 +26,4 @@ module.exports = {
     ]
   }
 
-};
+}

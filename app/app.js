@@ -1,26 +1,32 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 class Message extends Component {
 
-  constructor() {
-    super();
+  constructor () {
+    super()
+
     this.state = {
-      hello: "world"
-    };
+      hello: 'world'
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(this.state, nextProps);
+  componentWillReceiveProps (nextProps) {
+    console.log(this.state, nextProps)
   }
 
   render () {
-    return <h1>{"Hi, I'm counting " + this.props.counter }</h1>;
+    return <h1>{"Hi, I'm counting " + this.props.counter }</h1>
   }
+}
+
+Message.propTypes = {
+  counter: React.PropTypes.number
 }
 
 export default class App extends Component {
   constructor () {
-    super();
+    super()
+
     this.state = {
       counter: 0
     }
@@ -28,11 +34,11 @@ export default class App extends Component {
 
   componentDidMount () {
     setInterval(() => {
-      this.setState({ counter: ++this.state.counter });
+      this.setState({ counter: ++this.state.counter })
     }, 1000)
   }
 
   render () {
-    return <Message counter={this.state.counter}/>;
+    return <Message counter={this.state.counter}/>
   }
 }

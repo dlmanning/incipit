@@ -1,37 +1,28 @@
-'use strict';
+'use strict'
 
-var devServer = require('child_process').fork('./dev-server');
+const devServer = require('child_process').fork('./dev-server')
+const app = require('app')
+const BrowserWindow = require('browser-window')
 
-var app = require('app');
-var BrowserWindow = require('browser-window');
+let mainWindow = null
 
-var mainWindow = null;
+const appReady = new Promise((resolve, reject) => {
+  app.on('ready', () => resolve())
+})
 
-var appReady = new Promise(function (resolve, reject) {
-  app.on('ready', function () {
-    resolve();
-  });
-});
+const devServerReady = new Promise((resolve, reject) => {
+  devServer.on('message', msg => resolve())
+})
 
-var devServerReady = new Promise(function (resolve, reject) {
-  devServer.on('message', function (msg) {
-    resolve();
-  });
-});
-
-Promise.all([appReady, devServerReady]).then(function () {
+Promise.all([appReady, devServerReady]).then(() => {
   mainWindow = new BrowserWindow({
-      height: 600,
-      width: 800
-  });
+    height: 600,
+    width: 800
+  })
 
-  mainWindow.loadUrl('file://' + __dirname + '/app/index.html');
-});
+  mainWindow.loadUrl('file://' + __dirname + '/app/index.html')
+})
 
-app.on('will-quit', function () {
-  devServer.kill();
-});
+app.on('will-quit', () => devServer.kill())
 
-devServer.on('message', function (msg) {
-  console.log(msg);
-});
+devServer.on('message', msg => console.log(msg))
