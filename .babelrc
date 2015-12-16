@@ -1,16 +1,18 @@
 {
-  "optional": [
-    "es7.objectRestSpread",
-    "es7.asyncFunctions",
-    "runtime"
-  ],
-  "blacklist": [ 
-    "es6.classes",
-    "es6.forOf",
-    "es6.blockScoping",
-    "es6.arrowFunctions"
-  ],
-  "ignore": [
-    "node_modules"
+  "plugins": [
+    ["transform-react-jsx"],
+    ["transform-es2015-classes"],
+    ["transform-es2015-modules-commonjs"],
+    ["transform-es2015-destructuring"],
+    ["transform-async-to-generator"],
+    ["react-transform", {
+      "transforms": [
+        {
+          "transform": "react-transform-hmr",
+          "imports": ["react"],
+          "locals": ["module"]
+        }
+      ]
+    }]
   ]
 }

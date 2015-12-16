@@ -3,7 +3,7 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: [
-    'webpack-dev-server/client?http://localhost:8080', // WebpackDevServer host and port
+    'webpack-hot-middleware/client?path=http://localhost:8080/__webpack_hmr',
     'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
     './app/start' // Your appʼs entry point
   ],
@@ -21,7 +21,7 @@ module.exports = {
       {
         test: /\.js(x)?$/,
         include: [ path.resolve(__dirname, 'app') ],
-        loaders: ['react-hot', 'babel-loader']
+        loaders: ['babel']
       }
     ]
   }
