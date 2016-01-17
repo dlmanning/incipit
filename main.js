@@ -20,7 +20,7 @@ Promise.all([appReady, devServerReady]).then(() => {
     width: 800
   })
 
-  mainWindow.loadUrl('file://' + __dirname + '/app/index.html')
+  mainWindow.loadURL('file://' + __dirname + '/app/index.html')
 })
 
 app.on('will-quit', () => devServer.kill())
