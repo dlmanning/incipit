@@ -4,6 +4,6 @@ function getInitialState () {
   return {}
 }
 
-export appReducer = createReducer({
+export const appReducer = createReducer({
 
 }, getInitialState)
