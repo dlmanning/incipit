@@ -1,17 +1,18 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
+import createLogger from 'redux-logger'
 import * as reducers from './reducers'
-import { syncHistory, routeReducer } from 'react-router-redux'
-import { hashHistory } from 'react-router'
 
-const reduxRouterMiddleware = syncHistory(hashHistory)
+const logger = createLogger()
 
-const reducer = combineReducers({
-  ...reducers,
-  routing: routeReducer
-})
+const reducer = combineReducers(Object.assign(
+  {},
+  reducers
+))
 
-const createStoreWithMiddleware = applyMiddleware(reduxRouterMiddleware)(createStore)
-const store = createStoreWithMiddleware(reducer)
+const store = createStore(
+  reducer,
+  applyMiddleware(logger)
+)
 
 window.peakState = () => store.getState()
 

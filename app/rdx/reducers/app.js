@@ -1,4 +1,4 @@
-import createReducer from 'createReducer'
+import createReducer from 'create-reducer'
 
 function getInitialState () {
   return {}
