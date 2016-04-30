@@ -6,8 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "precommit": "eslint **/*.js"
-  },
+    "precommit": "./lint.sh"  },
   "author": "",
   "repository": {
     "type": "git",
