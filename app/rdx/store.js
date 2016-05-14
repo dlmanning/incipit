@@ -1,6 +1,6 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import createLogger from 'redux-logger'
-import * as reducers from './reducers'
+const { createStore, combineReducers, applyMiddleware } = require('redux')
+const createLogger = require('redux-logger')
+const reducers = require('./reducers')
 
 const logger = createLogger()
 
@@ -16,4 +16,4 @@ const store = createStore(
 
 window.peakState = () => store.getState()
 
-export default store
+module.exports = store

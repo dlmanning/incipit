@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
-import { Provider } from 'react-redux'
-import store from './rdx/store'
+const { Component, createFactory, DOM } = require('react')
+const { Provider: ProviderComponent } = require('react-redux')
+const store = require('./rdx/store')
 
-export default class App extends Component {
+const Provider = createFactory(ProviderComponent)
+const { h1 } = DOM
+
+class App extends Component {
   render () {
-    return (
-      <Provider store={store}>
-        <h1>Hello World</h1>
-      </Provider>
-    )
+    return Provider({ store }, h1(null, 'Hello World'))
   }
 }
+
+module.exports = createFactory(App)

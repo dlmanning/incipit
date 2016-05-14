@@ -1,1 +1,4 @@
-export * from './app'
+module.exports = Object.assign(
+  {},
+  require('./app')
+)

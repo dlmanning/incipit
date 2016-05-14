@@ -1,9 +1,9 @@
-import createReducer from 'create-reducer'
+const createReducer = require('create-reducer')
 
 function getInitialState () {
   return {}
 }
 
-export const appReducer = createReducer({
+exports.appReducer = createReducer({
 
 }, getInitialState)
