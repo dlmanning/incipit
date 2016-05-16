@@ -48,11 +48,9 @@ app.get('/test', (req, res) => {
 })
 
 http.createServer(app).listen(7000)
-https.createServer(httpsOptions, app).listen(7357)
-
-// app.listen(7357, () => {
-//   if (process.send) {
-//     process.send({ status: 'ready' })
-//   }
-//   console.log('API Proxy listening on 7357')
-// })
+https.createServer(httpsOptions, app).listen(7357, () => {
+  if (process.send) {
+    process.send({ status: 'ready' })
+  }
+  console.log('API Proxy listening on 7357')
+})

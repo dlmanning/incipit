@@ -23,9 +23,11 @@
     "husky": "^0.11.4"
   },
   "dependencies": {
+    "agentkeepalive": "^2.1.1",
     "create-reducer": "^1.1.0",
     "electron-prebuilt": "^1.1.0",
     "express-request-proxy": "^2.0.0",
+    "http-proxy": "^1.13.3",
     "material-ui": "^0.15.0",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
