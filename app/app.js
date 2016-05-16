@@ -1,14 +1,24 @@
-const { Component, createFactory, DOM } = require('react')
-const { Provider: ProviderComponent } = require('react-redux')
-const store = require('./rdx/store')
+const { Component, createFactory } = require('react')
+const { RaisedButton, ToolbarGroup, Toolbar } = require('./material-factories')
 
-const Provider = createFactory(ProviderComponent)
-const { h1 } = DOM
+const { fetch } = window
 
 class App extends Component {
   render () {
-    return Provider({ store }, h1(null, 'Hello World'))
+    return Toolbar(null,
+      ToolbarGroup({ firstChild: true },
+        RaisedButton({ onClick: doRequest }, 'Request'),
+        RaisedButton(null, 'Action')
+      )
+    )
   }
+}
+
+function doRequest () {
+  fetch('https://localhost:7357/values', { credentials: 'include' })
+    .then(res => res.text())
+    .then(text => console.log(text))
+    .catch(err => console.error(err))
 }
 
 module.exports = createFactory(App)
