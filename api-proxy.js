@@ -1,4 +1,5 @@
 const express = require('express')
+const http = require('http')
 const https = require('https')
 const httpProxy = require('http-proxy')
 const fs = require('fs')
@@ -15,13 +16,6 @@ const agent = new Agent({
   keepAliveTimeout: 30000 // free socket keepalive for 30 seconds
 })
 
-const proxy = httpProxy.createProxyServer({ changeOrigin: true, agent })
-
-proxy.on('proxyRes', function (proxyRes) {
-  var key = 'www-authenticate'
-  proxyRes.headers[key] = proxyRes.headers[key] && proxyRes.headers[key].split(',')
-})
-
 const keyPath = path.join(__dirname, 'certs', 'key.pem')
 const certPath = path.join(__dirname, 'certs', 'cert.pem')
 
@@ -30,15 +24,21 @@ const httpsOptions = {
   cert: fs.readFileSync(certPath)
 }
 
+const proxy = httpProxy.createProxyServer({ autoRewrite: true, changeOrigin: true, agent })
 const app = express()
+
+proxy.on('proxyRes', function (proxyRes) {
+  var key = 'www-authenticate'
+  proxyRes.headers[key] = proxyRes.headers[key] && proxyRes.headers[key].split(',')
+})
 
 app.use(logger())
 
-const APISERVER = 'https://dreamtime:44344'
+const APISERVER = 'https://localhost:44333'
 
-app.get('/values', (req, res) => {
+app.get('*', (req, res) => {
   proxy.web(req, res, {
-    target: `${APISERVER}/api`,
+    target: `${APISERVER}`,
     secure: false
   })
 })
@@ -47,8 +47,12 @@ app.get('/test', (req, res) => {
   res.end('It works?')
 })
 
-https.createServer(httpsOptions, app).listen(7357, () => {
-  if (process.send) {
-    process.send({ status: 'ready' })
-  }
-})
+http.createServer(app).listen(7000)
+https.createServer(httpsOptions, app).listen(7357)
+
+// app.listen(7357, () => {
+//   if (process.send) {
+//     process.send({ status: 'ready' })
+//   }
+//   console.log('API Proxy listening on 7357')
+// })

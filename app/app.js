@@ -7,15 +7,22 @@ class App extends Component {
   render () {
     return Toolbar(null,
       ToolbarGroup({ firstChild: true },
-        RaisedButton({ onClick: doRequest }, 'Request'),
-        RaisedButton(null, 'Action')
+        RaisedButton({ onClick: doProxyRequest }, 'Proxy'),
+        RaisedButton({ onClick: doDirectRequest }, 'Direct')
       )
     )
   }
 }
 
-function doRequest () {
-  fetch('https://localhost:7357/values', { credentials: 'include' })
+function doProxyRequest () {
+  fetch('https://localhost:7357/permissions', { credentials: 'include' })
+    .then(res => res.text())
+    .then(text => console.log(text))
+    .catch(err => console.error(err))
+}
+
+function doDirectRequest () {
+  fetch('https://localhost:44333/permissions', { credentials: 'include' })
     .then(res => res.text())
     .then(text => console.log(text))
     .catch(err => console.error(err))
