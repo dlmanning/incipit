@@ -16,3 +16,6 @@ node_modules
 ehthumbs.db
 Thumbs.db
 build
+
+# Devtools are cached in local storage
+devtools
