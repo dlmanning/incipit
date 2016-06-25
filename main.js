@@ -13,8 +13,7 @@ app.on('ready', createMainWindow)
 function createMainWindow () {
   mainWindow = new BrowserWindow({
     height: 600,
-    width: 800,
-    titleBarStyle: 'hidden'
+    width: 800
   })
 
   mainWindow.loadURL(`file://${mainWindowPath}`)
