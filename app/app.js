@@ -11,4 +11,4 @@ class App extends Component {
   }
 }
 
-module.exports = createFactory(App)
+module.exports = App
